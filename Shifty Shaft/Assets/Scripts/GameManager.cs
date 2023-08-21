@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -49,7 +48,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Authentication of " + Social.localUser.userName + " successful");
             else
                 Debug.Log("Authentication failed");
-        }); 
+        });
     }
 
     public void IncreaseScore()
@@ -107,12 +106,12 @@ public class GameManager : MonoBehaviour
         pauseButton.SetActive(true);
     }
 
-    private void ReportScore(long score)
+    private void ReportScore(int score)
     {
         if (!Social.localUser.authenticated)
             Authenticate();
 
-        Social.ReportScore(score, "test", success =>
+        Social.ReportScore((long)score, "globalLeaderboard", success =>
         {
             if (success)
                 Debug.Log("Reported score of " + score + " successfully");

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18030395, g: 0.22573234, b: 0.30695844, a: 1}
+  m_IndirectSpecularColor: {r: 0.18029517, g: 0.22573823, b: 0.30694664, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -911,8 +911,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shiftyText: {fileID: 731798020}
   shaftText: {fileID: 1319686738}
-  successText: {fileID: 0}
-  failureText: {fileID: 0}
   leaderboardButton: {fileID: 1481380491}
   scoreText: {fileID: 1655736405}
   highScoreText: {fileID: 1105598951}
@@ -1174,6 +1172,7 @@ GameObject:
   - component: {fileID: 731798021}
   - component: {fileID: 731798023}
   - component: {fileID: 731798022}
+  - component: {fileID: 731798024}
   m_Layer: 5
   m_Name: Shifty Text
   m_TagString: Untagged
@@ -1196,9 +1195,9 @@ RectTransform:
   m_Father: {fileID: 132092313}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 199, y: -325}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -215, y: -325}
   m_SizeDelta: {x: 185, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &731798022
@@ -1298,6 +1297,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731798020}
   m_CullTransparentMesh: 1
+--- !u!95 &731798024
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731798020}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67d79784eb1fe405bb3155ab8258e167, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &925351649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +1977,7 @@ GameObject:
   - component: {fileID: 1319686739}
   - component: {fileID: 1319686741}
   - component: {fileID: 1319686740}
+  - component: {fileID: 1319686742}
   m_Layer: 5
   m_Name: Shaft Text
   m_TagString: Untagged
@@ -2081,6 +2102,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319686738}
   m_CullTransparentMesh: 1
+--- !u!95 &1319686742
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319686738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 653c6e102e1d04d7ba81c0ae6b2dd836, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1438251767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,6 +2270,7 @@ GameObject:
   - component: {fileID: 1481380495}
   - component: {fileID: 1481380494}
   - component: {fileID: 1481380493}
+  - component: {fileID: 1481380496}
   m_Layer: 5
   m_Name: Leaderboard Button
   m_TagString: Untagged
@@ -2351,6 +2394,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481380491}
   m_CullTransparentMesh: 1
+--- !u!95 &1481380496
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481380491}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7dd834942957f4022b76846825dfd04a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1547001208
 MonoBehaviour:
   m_ObjectHideFlags: 0
