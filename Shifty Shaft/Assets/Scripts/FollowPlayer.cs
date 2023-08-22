@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    [SerializeField] private Rigidbody player;
+    [SerializeField] private Transform player;
 
     private Vector3 targetPosition;
     private float offset;
@@ -14,9 +14,7 @@ public class FollowPlayer : MonoBehaviour
         offset = transform.position.z - player.position.z;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void LateUpdate() {
         targetPosition.z = player.position.z + offset;
         transform.position = targetPosition;
     }

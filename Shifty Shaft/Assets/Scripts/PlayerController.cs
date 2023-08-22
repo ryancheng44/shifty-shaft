@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
         // Change to OSXPlayer before release
-        if (Application.platform == RuntimePlatform.OSXEditor)
+        if (Application.platform == RuntimePlatform.OSXPlayer)
             onMac = true;
     }
 

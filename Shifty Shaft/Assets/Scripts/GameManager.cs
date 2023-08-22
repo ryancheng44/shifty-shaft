@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
         if (!Social.localUser.authenticated)
             Authenticate();
+        
+        ReportScore(highScore, 1);
     }
 
     private void Authenticate() {
@@ -67,7 +69,6 @@ public class GameManager : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetInt("High Score", highScore);
-            ReportScore(highScore);
             newText.SetActive(true);
         }
 
@@ -106,25 +107,35 @@ public class GameManager : MonoBehaviour
         pauseButton.SetActive(true);
     }
 
-    private void ReportScore(int score)
+    private void ReportScore(int score, int times)
     {
-        if (!Social.localUser.authenticated)
-            Authenticate();
+        if (times > 3)
+            return;
 
-        Social.ReportScore((long)score, "globalLeaderboard", success =>
-        {
-            if (success)
-                Debug.Log("Reported score of " + score + " successfully");
-            else
-                Debug.Log("Failed to report score");
-        });
+        if (!Social.localUser.authenticated) {
+            Authenticate();
+            ReportScore(score, times++);
+        } else {
+            Social.ReportScore((long)score, "globalLeaderboard", success =>
+            {
+                if (success)
+                    Debug.Log("Reported score of " + score + " successfully");
+                else
+                    Debug.Log("Failed to report score");
+            });
+        }
     }
 
-    public void ShowLeaderboard()
+    public void ShowLeaderboard(int times)
     {
-        if (!Social.localUser.authenticated)
-            Authenticate();
+        if (times > 3)
+            return;
 
-        Social.ShowLeaderboardUI();
+        if (!Social.localUser.authenticated) {
+            Authenticate();
+            ShowLeaderboard(times++);
+        } else {
+            Social.ShowLeaderboardUI();
+        }
     }
 }

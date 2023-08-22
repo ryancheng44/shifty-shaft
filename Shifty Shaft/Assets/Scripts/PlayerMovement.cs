@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             obstacleSpawner.FloatingOrigin(playerPositionZ);
         } else if (!GameManager.instance.isGameOver)
         {
-            rb.MovePosition(rb.position + transform.forward * currentSpeed * Time.fixedDeltaTime);
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, currentSpeed);
 
             if (currentSpeed < maxSpeed)
                 currentSpeed *= 1.0001f;
