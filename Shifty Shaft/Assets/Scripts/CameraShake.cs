@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] private float duration = 0.5f;
-    [SerializeField] private float magnitude = 5f;
+    [SerializeField] private float duration;
+    [SerializeField] private float magnitude;
 
     public IEnumerator Shake()
     {
@@ -14,14 +14,13 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude / 100;
-            float y = Random.Range(-1f, 1f) * magnitude / 100;
+            float x = Random.Range(-1f, 1f) * magnitude / 100f;
+            float y = Random.Range(-1f, 1f) * magnitude / 100f;
 
-            transform.position += new Vector3(x, y, 0);
-
-            elapsed += Time.deltaTime;
+            transform.position += new Vector3(x, y);
 
             yield return null;
+            elapsed += Time.deltaTime;
         }
 
         transform.position = originalPosition;

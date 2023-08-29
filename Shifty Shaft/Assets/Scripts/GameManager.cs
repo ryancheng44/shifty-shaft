@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject resumeButton;
-    [SerializeField] private Animator retryButton;
+    [SerializeField] private GameObject retryButton;
 
     public bool isGameOver { get; private set; } = false;
     public bool isGameInProgress { get; private set; } = false;
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         if (!Social.localUser.authenticated)
             Authenticate();
         
-        ReportScore(highScore, 1);
+        ReportScore(highScore);
     }
 
     private void Authenticate() {
@@ -76,22 +76,21 @@ public class GameManager : MonoBehaviour
         highScoreText.gameObject.SetActive(true);
 
         pauseButton.SetActive(false);
-        retryButton.gameObject.SetActive(true);
+        retryButton.SetActive(true);
     }
 
     public void GameInProgress() {
-        isGameInProgress = true;
         shiftyText.SetActive(false);
         shaftText.SetActive(false);
+        leaderboardButton.SetActive(false);
+
         scoreText.gameObject.SetActive(true);
         pauseButton.SetActive(true);
-        leaderboardButton.SetActive(false);
+
+        isGameInProgress = true;
     }
 
-    public void Retry()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    public void Retry() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     public void Pause()
     {
@@ -107,35 +106,16 @@ public class GameManager : MonoBehaviour
         pauseButton.SetActive(true);
     }
 
-    private void ReportScore(int score, int times)
+    private void ReportScore(int score)
     {
-        if (times > 3)
-            return;
-
-        if (!Social.localUser.authenticated) {
-            Authenticate();
-            ReportScore(score, times++);
-        } else {
-            Social.ReportScore((long)score, "globalLeaderboard", success =>
-            {
-                if (success)
-                    Debug.Log("Reported score of " + score + " successfully");
-                else
-                    Debug.Log("Failed to report score");
-            });
-        }
+        Social.ReportScore(score, "globalLeaderboard", success =>
+        {
+            if (success)
+                Debug.Log("Reported score of " + score + " successfully");
+            else
+                Debug.Log("Failed to report score");
+        });
     }
 
-    public void ShowLeaderboard(int times)
-    {
-        if (times > 3)
-            return;
-
-        if (!Social.localUser.authenticated) {
-            Authenticate();
-            ShowLeaderboard(times++);
-        } else {
-            Social.ShowLeaderboardUI();
-        }
-    }
+    public void ShowLeaderboard() => Social.ShowLeaderboardUI();
 }

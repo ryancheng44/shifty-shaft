@@ -966,7 +966,7 @@ MonoBehaviour:
   newText: {fileID: 1795286903}
   pauseButton: {fileID: 965787886}
   resumeButton: {fileID: 11763580}
-  retryButton: {fileID: 303614456}
+  retryButton: {fileID: 303614451}
 --- !u!1 &541940104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleSpawner: {fileID: 3469287838217352505}
   startSpeed: 10
-  maxSpeed: 20
+  maxSpeed: 25
 --- !u!1 &586908807
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,6 +3414,7 @@ MonoBehaviour:
   distanceBetweenObstacles: 10
   distanceFromFirstObstacle: 50
   obstaclesPerColor: 10
+  obstaclesToSpawn: 10
 --- !u!1 &4864539076013645841
 GameObject:
   m_ObjectHideFlags: 0

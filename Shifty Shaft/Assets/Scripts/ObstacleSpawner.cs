@@ -19,8 +19,9 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] private float distanceBetweenObstacles;
     [SerializeField] private float distanceFromFirstObstacle;
     [SerializeField] private int obstaclesPerColor;
+    [SerializeField] private int obstaclesToSpawn;
 
-    private Dictionary<string, ObjectPool<GameObject>> obstaclePools = new Dictionary<string, ObjectPool<GameObject>>();
+    private Dictionary<string, ObjectPool<GameObject>> obstaclePools = new ();
     private Color currentColor;
 
     private float nextSpawnPositionZ;
@@ -32,13 +33,11 @@ public class ObstacleSpawner : MonoBehaviour
         RenderSettings.fogStartDistance = GameObject.Find("Player").transform.position.z - Camera.main.transform.position.z;
         RenderSettings.fogEndDistance =  RenderSettings.fogStartDistance + distanceFromFirstObstacle;
 
-        int obstaclesToSpawn = Mathf.FloorToInt(distanceFromFirstObstacle / distanceBetweenObstacles) + 3;
-
         nextSpawnPositionZ = distanceFromFirstObstacle;
 
         foreach (GameObject obstacle in obstacles)
         {
-            ObjectPool<GameObject> obstaclePool = new ObjectPool<GameObject>(() =>
+            ObjectPool<GameObject> obstaclePool = new (() =>
             {
                 return Instantiate(obstacle, transform);
             }, obstacle =>

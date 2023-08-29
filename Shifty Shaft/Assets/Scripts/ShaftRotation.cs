@@ -13,19 +13,14 @@ public class ShaftRotation : MonoBehaviour
     // Start is called before the first frame update
     void Start() => rb = GetComponent<Rigidbody>();
 
-    public IEnumerator Rotate(Direction directionToRotate)
+    public IEnumerator Rotate(bool isRotatingRight)
     {
         Quaternion targetRotation = rb.rotation;
 
-        switch (directionToRotate)
-        {
-            case Direction.Left:
-                targetRotation.eulerAngles += new Vector3(0f, 0f, -90f);
-                break;
-            case Direction.Right:
-                targetRotation.eulerAngles += new Vector3(0f, 0f, 90f);
-                break;
-        }
+        if (isRotatingRight)
+            targetRotation.eulerAngles += new Vector3(0f, 0f, 90f);
+        else
+            targetRotation.eulerAngles += new Vector3(0f, 0f, -90f);
 
         while (Quaternion.Angle(rb.rotation, targetRotation) > angleThreshold)
         {

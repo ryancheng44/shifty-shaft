@@ -25,14 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.instance.isGameInProgress)
+        if (!GameManager.instance.isGameInProgress || GameManager.instance.isGameOver)
             return;
 
         if (rb.position.z > 100f)
         {
             float playerPositionZ = rb.position.z;
 
-            rb.MovePosition(new Vector3(0f, rb.position.y, 0f));
+            rb.MovePosition(new Vector3(0f, rb.position.y));
 
             for (int i = 0; i < trailRenderer.positionCount; i++)
             {
@@ -42,8 +42,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             obstacleSpawner.FloatingOrigin(playerPositionZ);
-        } else if (!GameManager.instance.isGameOver)
-        {
+        } else {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, currentSpeed);
 
             if (currentSpeed < maxSpeed)

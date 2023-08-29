@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool swipeRegistered;
 
     private float jumpBufferTimer;
-    private Direction directionToRotate;
+    private bool isRotatingRight;
     private bool isGrounded;
 
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
         // Change to OSXPlayer before release
-        if (Application.platform == RuntimePlatform.OSXPlayer)
+        if (Application.platform == RuntimePlatform.OSXEditor)
             onMac = true;
     }
 
@@ -44,14 +44,14 @@ public class PlayerController : MonoBehaviour
                     GameManager.instance.GameInProgress();
 
                 jumpBufferTimer = jumpBufferTime;
-                directionToRotate = Direction.Left;
+                isRotatingRight = false;
             } else if (Input.GetKeyDown("d"))
             {
                 if (!GameManager.instance.isGameInProgress)
                     GameManager.instance.GameInProgress();
 
                 jumpBufferTimer = jumpBufferTime;
-                directionToRotate = Direction.Right;
+                isRotatingRight = true;
             }
         } else
         {
@@ -63,8 +63,7 @@ public class PlayerController : MonoBehaviour
                 {
                     swipeRegistered = false;
                     touchBegan = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Moved && !swipeRegistered)
+                } else if (touch.phase == TouchPhase.Moved && !swipeRegistered)
                 {
                     touchMoved = touch.position;
 
@@ -77,9 +76,9 @@ public class PlayerController : MonoBehaviour
                         jumpBufferTimer = jumpBufferTime;
 
                         if (touchMoved.x - touchBegan.x < 0)
-                            directionToRotate = Direction.Left;
+                            isRotatingRight = false;
                         else
-                            directionToRotate = Direction.Right;
+                            isRotatingRight = true;
                     }
                 }
             }
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferTimer = 0f;
 
             Jump();
-            StartCoroutine(shaftRotation.Rotate(directionToRotate));
+            StartCoroutine(shaftRotation.Rotate(isRotatingRight));
         }
     }
 
@@ -105,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        rb.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0f, jumpForce), ForceMode.Impulse);
         isGrounded = false;
 
         trailRenderer.emitting = false;
@@ -113,8 +112,3 @@ public class PlayerController : MonoBehaviour
     }
 }
 
-public enum Direction
-{
-    Left,
-    Right
-}
