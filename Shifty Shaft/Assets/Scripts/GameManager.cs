@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("Menu")]
     [SerializeField] private GameObject shiftyText;
     [SerializeField] private GameObject shaftText;
-
     [SerializeField] private GameObject leaderboardButton;
+    [SerializeField] private GameObject sliderImage;
 
     [Header("Game")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
             Destroy(this);
 
+        if (Application.platform == RuntimePlatform.OSXPlayer)
+            sliderImage.SetActive(false);
+
         highScore = PlayerPrefs.GetInt("High Score", 0);
 
         if (!Social.localUser.authenticated)
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+
+        if (score % 10 == 0)
+            SFXManager.instance.PlaySFX("Level Complete");
     }
 
     public void GameOver()
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
         shiftyText.SetActive(false);
         shaftText.SetActive(false);
         leaderboardButton.SetActive(false);
+        sliderImage.SetActive(false);
 
         scoreText.gameObject.SetActive(true);
         pauseButton.SetActive(true);
@@ -90,10 +97,16 @@ public class GameManager : MonoBehaviour
         isGameInProgress = true;
     }
 
-    public void Retry() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void Retry()
+    {
+        SFXManager.instance.PlaySFX("Button Click");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void Pause()
     {
+        SFXManager.instance.PlaySFX("Button Click");
+
         Time.timeScale = 0;
         pauseButton.SetActive(false);
         resumeButton.SetActive(true);
@@ -101,6 +114,8 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        SFXManager.instance.PlaySFX("Button Click");
+
         Time.timeScale = 1;
         resumeButton.SetActive(false);
         pauseButton.SetActive(true);
@@ -117,5 +132,8 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    public void ShowLeaderboard() => Social.ShowLeaderboardUI();
+    public void ShowLeaderboard() {
+        SFXManager.instance.PlaySFX("Button Click");
+        Social.ShowLeaderboardUI();
+    }
 }

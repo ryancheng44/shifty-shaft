@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDeath()
     {
+        SFXManager.instance.PlaySFX("Death");
+
         GameManager.instance.GameOver();
 
         trailRenderer.emitting = false;

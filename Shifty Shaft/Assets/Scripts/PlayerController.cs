@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
         // Change to OSXPlayer before release
-        if (Application.platform == RuntimePlatform.OSXEditor)
+        if (Application.platform == RuntimePlatform.OSXPlayer)
             onMac = true;
     }
 
@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        SFXManager.instance.PlaySFX("Jump");
+
         rb.AddForce(new Vector3(0f, jumpForce), ForceMode.Impulse);
         isGrounded = false;
 
