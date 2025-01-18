@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
             obstacleSpawner.FloatingOrigin(playerPositionZ);
         } else {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, currentSpeed);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, currentSpeed);
 
             if (currentSpeed < maxSpeed)
                 currentSpeed *= 1.0001f;
